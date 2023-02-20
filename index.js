@@ -82,36 +82,64 @@ route.post('/ADDUSER',bodyParser.json(),(req,res)=>
 )}
 )
 
-// route.put('/product/:id', bodyParser.json(),(req, res) => {
-//     let data = req.body;
-//     const strQry =
-//     `
-//     update products
-//     set ?
-//     where prodcuctID = ?;
-//     `;
+route.put('/product/:id', bodyParser.json(),(req, res) => {
+    let data = req.body;
+    const strQry =
+    `
+    update PRODUCTS
+    set ?
+    where ID = ?;
+    `;
 
-// db.query(strQry, [data, req.params.id],
-//     (err)=>{
-//         if(err) throw err;
-//         res.status(200).json( {msg:
-//         "a row was affected"});
-//     })
-// });
+db.query(strQry, [data, req.params.id],
+    (err)=>{
+        if(err) throw err;
+        res.status(200).json( {msg:
+        "a row was affected"});
+    })
+});
+
+route.put('/User/:id', bodyParser.json(),(req, res) => {
+    let data = req.body;
+    const strQry =
+    `
+    update USERS
+    set ?
+    where ID = ?;
+    `;
+
+db.query(strQry, [data, req.params.id],
+    (err)=>{
+        if(err) throw err;
+        res.status(200).json( {msg:
+        "a row was affected"});
+    })
+});
 
 
 
-// route.delete('/product/:id',bodyParser.json(),(req, res) => {
-//     const userId = req.params.id;
-//     const deleteQuery = 'DELETE  FROM products WHERE prodcuctID = ?;';
+route.delete('/product/:id',bodyParser.json(),(req, res) => {
+    const userId = req.params.id;
+    const deleteQuery = 'DELETE  FROM PRODUCTS  WHERE ID = ?;';
   
-//     // Run MySQL delete query
-//    db.query(deleteQuery, [userId], (err) => {
-//       if (err) throw err;
+    // Run MySQL delete query
+   db.query(deleteQuery, [userId], (err) => {
+      if (err) throw err;
       
-//       res.sendStatus(200).json({msg:`ok`});
-//     })
-//   }); 
+      res.sendStatus(200).json({msg:`ok`});
+    })
+  }); 
+route.delete('/user/:id',bodyParser.json(),(req, res) => {
+    const userId = req.params.id;
+    const deleteQuery = 'DELETE  FROM USERS  WHERE ID = ?;';
+  
+    // Run MySQL delete query
+   db.query(deleteQuery, [userId], (err) => {
+      if (err) throw err;
+      
+      res.sendStatus(200).json({msg:`ok`});
+    })
+  }); 
 
 
 
